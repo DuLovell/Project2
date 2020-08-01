@@ -3,5 +3,11 @@
 {% block body %}
     <h2>Active Listings</h2>
 
-    TODO
+    {% for advert in advertisements %}
+    	<div>
+    		<h6>{{ advert.title }}</h6>
+    		<p><span style="text-weight: bold">Price:</span>${{ advert.price }}</p>
+    	</div>
+
+    {% endfor %}
 {% endblock %}
