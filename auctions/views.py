@@ -65,3 +65,24 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+def create(request):
+    if request.method == "GET":
+        return render(request, "auctions/create.html")
+    elif request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        price = request.POST.get("price")
+        
+        ad = Advert(title=title, description=description, price=price)
+        ad.save()
+        return HttpResponseRedirect(reverse("index"))
+
+def advertisement(request, id):
+    if request.method == "POST":
+        pass
+    ad = Advert.objects.get(id=id)
+    return render(request, "auctions/advertisement.html", {
+        "advert": ad,
+        "min_bid": ad.price + 1
+        })

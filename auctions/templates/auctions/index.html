@@ -1,12 +1,17 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
+    <h2>Active Listings</h2><br>
 
     {% for advert in advertisements %}
-    	<div>
-    		<h6>{{ advert.title }}</h6>
-    		<p><span style="text-weight: bold">Price:</span>${{ advert.price }}</p>
+
+    	<div id="ad">
+    		<a href="listings/{{advert.id}}" >
+	    		<h4>{{ advert.title }}</h4>
+	    		<p><span style="font-weight: bold">Price: </span>${{ advert.price }}</p>
+	    		<p>{{ advert.description }}</p>
+	    		<p id="created">{{ advert.created }}</p>
+    		</a>
     	</div>
 
     {% endfor %}
