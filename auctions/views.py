@@ -91,6 +91,10 @@ def advertisement(request, id):
     user = request.user.username
     ad = Advert.objects.get(id=id)
     highest_bid = ad.bid.last().amount
+
+    if request.GET.get("q") == "close":
+        ad.status = False
+        ad.save()
     
     if request.method == "POST":
         new_amount = request.POST.get("amount")
@@ -101,5 +105,7 @@ def advertisement(request, id):
 
     return render(request, "auctions/advertisement.html", {
         "advert": ad,
-        "min_bid": highest_bid + 1
+        "min_bid": highest_bid + 1,
+        "username": user,
+
         })

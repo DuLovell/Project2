@@ -6,17 +6,33 @@
 
 
 {% block body %}
-	<h2> {{ advert.title}} </h2>
-    <!-- place for image section -->
-	<div> {{ advert.description }} </div>
-	<div> Last bid by <a href="" id="username">{{ advert.bid.last.user }}</a>: ${{ advert.bid.last.amount }} </div>
-	{% if user.is_authenticated %}
-		<form action="{{advert.id}}" method="post">
-			{% csrf_token %}
-			<input type="number" step="0.01" min={{min_bid}} name="amount" required>
-			<button type="submit">Place bid</button>
-		</form>
+	    <!-- place for image section -->
+		<h2> {{ advert.title}} </h2>
+		<div> {{ advert.description }} </div>
+	
+	{% if advert.status %}
+		{% if user.is_authenticated and advert.bid.first.user == username %}
+			<form action="" method="get">
+				<input type="hidden" name="q" value="close">
+				<button type="submit">Close auction</button></a>
+			</form>
+		{% endif %}
+		<div> Last bid by <a href="" id="username">{{ advert.bid.last.user }}</a>: ${{ advert.bid.last.amount }} </div>
+		{% if user.is_authenticated %}
+			<form action="{{advert.id}}" method="post">
+				{% csrf_token %}
+				<input type="number" step="0.01" min={{min_bid}} name="amount" required>
+				<button type="submit">Place bid</button>
+			</form>
+		{% else %}
+			<p>Log in to place a bid</p>
+		{% endif %}
+	
 	{% else %}
-		<p>Log in to place a bid</p>
+		{% if advert.bid.last.user == username %}
+			<div>You won this auction!</div>
+		{% else %}
+			<div>The winner is {{ advert.bid.last.user }} with ${{ advert.bid.last.amount }} bid!</div>
+		{% endif %}
 	{% endif %}
 {% endblock %}

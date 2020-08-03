@@ -11,7 +11,7 @@ class User(AbstractUser):
 class Advert(models.Model):
 	title = models.CharField(max_length=32)
 	description = models.TextField(max_length=1024)
-	#price = models.DecimalField(max_digits=8, decimal_places=2)
+	status = models.BooleanField(default=True)
 	created = models.DateTimeField(auto_now_add=True)
 
 	##TODO photo = models.ImageField (разобраться с Pillow)
