@@ -33,3 +33,11 @@ a, a:hover {
 	color: #ff6c00;
 	border-bottom: 1px solid #ff6c00;
 }
+
+#username {
+	color: 	#ff6c00;
+}
+
+#username:hover {
+	border-bottom: 1px solid #ff6c00;
+}

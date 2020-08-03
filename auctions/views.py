@@ -1,17 +1,18 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
-from .models import User, Advert
+from .models import User, Advert, Bid
 
 
 def index(request):
     advertisements = Advert.objects.all()
 
     return render(request, "auctions/index.html", {
-        "advertisements": advertisements
+        "advertisements": advertisements,
         })
 
 
@@ -66,23 +67,39 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+
+@login_required
 def create(request):
+    user = request.user.username
+    
     if request.method == "GET":
         return render(request, "auctions/create.html")
     elif request.method == "POST":
         title = request.POST.get("title")
         description = request.POST.get("description")
         price = request.POST.get("price")
-        
-        ad = Advert(title=title, description=description, price=price)
+
+        ad = Advert(title=title, description=description)
         ad.save()
+        bid = Bid(user=user, amount=price, advertisement=ad)
+        bid.save()
+
         return HttpResponseRedirect(reverse("index"))
 
+
 def advertisement(request, id):
-    if request.method == "POST":
-        pass
+    user = request.user.username
     ad = Advert.objects.get(id=id)
+    highest_bid = ad.bid.last().amount
+    
+    if request.method == "POST":
+        new_amount = request.POST.get("amount")
+        bid = Bid(user=user, amount=new_amount, advertisement=ad)
+        bid.save()
+
+        return redirect("advertisement", id=id)
+
     return render(request, "auctions/advertisement.html", {
         "advert": ad,
-        "min_bid": ad.price + 1
+        "min_bid": highest_bid + 1
         })
