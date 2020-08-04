@@ -42,3 +42,7 @@ a, a:hover {
 	color: 	#ff6c00;
 	/*border-bottom: 1px solid #ff6c00;*/
 }
+.adv-info {
+	position:relative;
+	left: 320px;
+}
