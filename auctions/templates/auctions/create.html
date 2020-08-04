@@ -9,6 +9,7 @@ Create New Lot
 <h2>Create a lot</h2>
 <form action="create" method="post" style="margin: 20px">
 	{% csrf_token %}
+	<input type="url" name="image" placeholder="Image URL"><br>
 	<input type="text" name="title" placeholder="Title"><br>
 	<textarea name="description" placeholder="Description"></textarea><br>
 	<input type="number" step="0.01" min=0 name="price" placeholder="Start price"><br>

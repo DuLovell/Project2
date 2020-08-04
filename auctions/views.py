@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Advert, Bid
+from .models import User, Advert, Bid, Comment
 
 
 def index(request):
@@ -76,10 +76,11 @@ def create(request):
         return render(request, "auctions/create.html")
     elif request.method == "POST":
         title = request.POST.get("title")
+        image_url = request.POST.get("image")
         description = request.POST.get("description")
         price = request.POST.get("price")
 
-        ad = Advert(title=title, description=description)
+        ad = Advert(title=title, description=description, image=image_url)
         ad.save()
         bid = Bid(user=user, amount=price, advertisement=ad)
         bid.save()
@@ -96,6 +97,12 @@ def advertisement(request, id):
     if request.GET.get("q") == "close":
         ad.active = False
         ad.save()
+
+    if request.GET.get("comment"):
+        text = request.GET.get("comment")
+        new_comment = Comment(user=user, text=text, advertisement=ad)
+        new_comment.save()
+
     
     if request.method == "POST":
         new_amount = request.POST.get("amount")
