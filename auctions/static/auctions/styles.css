@@ -8,19 +8,19 @@ a, a:hover {
 	color: black;
 }
 
-#ad {
+.ad {
 	padding: 20px;
 	margin: 10px 0px;
 	border: 1px solid #c4c4c4;
 	border-radius: 5px;
 	height: 200px;
 }
-#ad:hover {
+.ad:hover {
 	box-shadow: 1px 1px 3px 2px #ff9b52;
 	border-color: #ff9b52;
 }
 
-#created {
+.created {
 	font-size: 12px;
 	color: #696969;
 	font-weight: bold;
@@ -34,10 +34,11 @@ a, a:hover {
 	border-bottom: 1px solid #ff6c00;
 }
 
-#username {
-	color: 	#ff6c00;
+.username {
+	font-weight: bold;
 }
 
-#username:hover {
-	border-bottom: 1px solid #ff6c00;
+.username:hover {
+	color: 	#ff6c00;
+	/*border-bottom: 1px solid #ff6c00;*/
 }

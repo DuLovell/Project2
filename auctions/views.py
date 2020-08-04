@@ -91,9 +91,10 @@ def advertisement(request, id):
     user = request.user.username
     ad = Advert.objects.get(id=id)
     highest_bid = ad.bid.last().amount
+    comments = ad.comments.all()
 
     if request.GET.get("q") == "close":
-        ad.status = False
+        ad.active = False
         ad.save()
     
     if request.method == "POST":
@@ -107,5 +108,5 @@ def advertisement(request, id):
         "advert": ad,
         "min_bid": highest_bid + 1,
         "username": user,
-
+        "comments": comments
         })

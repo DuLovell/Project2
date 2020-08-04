@@ -10,14 +10,14 @@
 		<h2> {{ advert.title}} </h2>
 		<div> {{ advert.description }} </div>
 	
-	{% if advert.status %}
+	{% if advert.active %}
 		{% if user.is_authenticated and advert.bid.first.user == username %}
 			<form action="" method="get">
 				<input type="hidden" name="q" value="close">
 				<button type="submit">Close auction</button></a>
 			</form>
 		{% endif %}
-		<div> Last bid by <a href="" id="username">{{ advert.bid.last.user }}</a>: ${{ advert.bid.last.amount }} </div>
+		<div> Last bid by <a href="" class="username">{{ advert.bid.last.user }}</a>: ${{ advert.bid.last.amount }} </div>
 		{% if user.is_authenticated %}
 			<form action="{{advert.id}}" method="post">
 				{% csrf_token %}
@@ -35,4 +35,14 @@
 			<div>The winner is {{ advert.bid.last.user }} with ${{ advert.bid.last.amount }} bid!</div>
 		{% endif %}
 	{% endif %}
+	<br>
+	<h3>Comments</h3><hr>
+	{% for comment in comments %}
+		<div class="comment">
+			<a href="" class="username">{{ comment.user }}</a>
+			<p>{{ comment.text }}</p>
+		</div>
+
+	{% endfor %}
+
 {% endblock %}

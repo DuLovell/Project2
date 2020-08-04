@@ -5,12 +5,12 @@
 
     {% for advert in advertisements %}
 
-    	<div id="ad">
+    	<div class="ad">
     		<a href="listings/{{advert.id}}" >
 	    		<h4>{{ advert.title }}</h4>
 	    		<p><span style="font-weight: bold">Price: </span>${{advert.bid.last.amount }}</p>
 	    		<p>{{ advert.description }}</p>
-	    		<p id="created">{{ advert.created }}</p>
+	    		<p class="created">{{ advert.created }}</p>
     		</a>
     	</div>
 
