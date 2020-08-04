@@ -45,4 +45,5 @@ a, a:hover {
 .adv-info {
 	position:relative;
 	left: 320px;
+	display: table;
 }
