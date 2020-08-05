@@ -94,10 +94,21 @@ def advertisement(request, id):
     ad = Advert.objects.get(id=id)
     highest_bid = ad.bid.last().amount
     comments = ad.comments.all().order_by("-date")
+    
+    user_obj = User.objects.get(username=user)
+    current_user_saved = ad.saved.filter(username=user)  # QuerySet
+
+    if request.GET.get("q") == "watchlist":
+        if current_user_saved:
+            ad.saved.remove(user_obj)
+        else:
+            ad.saved.add(user_obj)
+        return redirect("advertisement", id=id)
 
     if request.GET.get("q") == "close":
         ad.active = False
         ad.save()
+        return redirect("advertisement", id=id)
 
     if request.POST.get("comment"):
         text = request.POST.get("comment")

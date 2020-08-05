@@ -6,12 +6,11 @@ class User(AbstractUser):
 	pass
 
 
-
-
 class Advert(models.Model):
 	title = models.CharField(max_length=32)
 	image = models.URLField(max_length=1024)
 	description = models.TextField(max_length=1024)
+	saved = models.ManyToManyField(User, blank=True, related_name="adverts_saved")
 
 	CATEGORY_CHOICES = [
 		("Fashion","Fashion"),
@@ -46,3 +45,4 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return f"{self.user}: {self.text}"
+

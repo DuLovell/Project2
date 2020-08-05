@@ -7,6 +7,12 @@
 
 {% block body %}
 		<p style="display: table; float: right;">{{ advert.category }}</p>
+		{% if user.is_authenticated %}
+			<form>
+				<input type="hidden" name="q" value="watchlist">
+				<button type="submit">Watchlist</button>	
+			</form>
+		{% endif %}
 		<img src={{advert.image}} alt="pic" style="width: 60%;">
 		<h1> {{ advert.title}} </h1>
 		<div> {{ advert.description }} </div>
