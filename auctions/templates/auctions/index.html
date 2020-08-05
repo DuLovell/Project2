@@ -8,8 +8,8 @@
     	<div class="ad">
     		<a href="listings/{{advert.id}}" style="">
     			<img src={{advert.image}} style="width: 300px; height: 150px; position: absolute; left: 20px; overflow: auto;">
-	    		<h4 class="adv-info">{{ advert.title }}</h4>
-	    		<p class="adv-info"><span style="font-weight: bold">Price: </span>${{advert.bid.last.amount }}</p>
+	    		<h3 class="adv-info">{{ advert.title }}</h3>
+	    		<p class="adv-info" style="font-weight: bold">${{advert.bid.last.amount }}</p>
 	    		<p class="adv-info">{{ advert.description }}</p>
 	    		<p class="created adv-info">{{ advert.created }}</p>
     		</a>

@@ -9,7 +9,7 @@ from .models import User, Advert, Bid, Comment
 
 
 def index(request):
-    advertisements = Advert.objects.all()
+    advertisements = Advert.objects.all().order_by("-created")
 
     return render(request, "auctions/index.html", {
         "advertisements": advertisements,
@@ -79,8 +79,9 @@ def create(request):
         image_url = request.POST.get("image")
         description = request.POST.get("description")
         price = request.POST.get("price")
+        category = request.POST.get("category")
 
-        ad = Advert(title=title, description=description, image=image_url)
+        ad = Advert(title=title, description=description, image=image_url, category=category)
         ad.save()
         bid = Bid(user=user, amount=price, advertisement=ad)
         bid.save()
@@ -92,19 +93,20 @@ def advertisement(request, id):
     user = request.user.username
     ad = Advert.objects.get(id=id)
     highest_bid = ad.bid.last().amount
-    comments = ad.comments.all()
+    comments = ad.comments.all().order_by("-date")
 
     if request.GET.get("q") == "close":
         ad.active = False
         ad.save()
 
-    if request.GET.get("comment"):
-        text = request.GET.get("comment")
+    if request.POST.get("comment"):
+        text = request.POST.get("comment")
         new_comment = Comment(user=user, text=text, advertisement=ad)
         new_comment.save()
+        return redirect("advertisement", id=id)
 
     
-    if request.method == "POST":
+    elif request.POST.get("amount"):
         new_amount = request.POST.get("amount")
         bid = Bid(user=user, amount=new_amount, advertisement=ad)
         bid.save()
@@ -115,5 +117,6 @@ def advertisement(request, id):
         "advert": ad,
         "min_bid": highest_bid + 1,
         "username": user,
-        "comments": comments
+        "comments": comments,
+        "id": id
         })

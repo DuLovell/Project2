@@ -12,11 +12,18 @@ class Advert(models.Model):
 	title = models.CharField(max_length=32)
 	image = models.URLField(max_length=1024)
 	description = models.TextField(max_length=1024)
+
+	CATEGORY_CHOICES = [
+		("Fashion","Fashion"),
+		("Toys", "Toys"),
+		("Electronics" ,"Electronics"),
+		("Home", "Home"),
+		("Appliances", "Appliances"),
+		("Books", "Books")
+	]
+	category = models.CharField(max_length=32, choices=CATEGORY_CHOICES)
 	active = models.BooleanField(default=True)
 	created = models.DateTimeField(auto_now_add=True)
-
-	##TODO photo = models.ImageField (разобраться с Pillow)
-	#breif_desription = models.Charfield(max_length=64)
 
 	def __str__(self):
 		return f"{self.id}. {self.title}: {self.description}"

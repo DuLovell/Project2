@@ -47,3 +47,9 @@ a, a:hover {
 	left: 320px;
 	display: table;
 }
+
+.comment-date {
+	font-size: 11px;
+	color: #818181;
+	font-weight: bold;
+}

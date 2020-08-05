@@ -6,12 +6,13 @@
 
 
 {% block body %}
+		<p style="display: table; float: right;">{{ advert.category }}</p>
 		<img src={{advert.image}} alt="pic" style="width: 60%;">
-		<h2> {{ advert.title}} </h2>
+		<h1> {{ advert.title}} </h1>
 		<div> {{ advert.description }} </div>
 	
 	{% if advert.active %}
-		<div> Last bid by <a href="" class="username">{{ advert.bid.last.user }}</a>: ${{ advert.bid.last.amount }} </div>
+		<div style="font-weight: bold; font-size: 22px;"> ${{ advert.bid.last.amount }}</div>
 		{% if user.is_authenticated and advert.bid.first.user == username %}
 			<form action="" method="get">
 				<input type="hidden" name="q" value="close">
@@ -38,7 +39,8 @@
 	<br>
 	<h3>Comments</h3><hr>
 	{% if user.is_authenticated %}
-		<form>
+		<form action={{id}} method="post">
+			{% csrf_token %}
 			<textarea type="text" name="comment"></textarea>
 			<button type="submit" >Leave feedback</button>
 		</form>
@@ -48,6 +50,7 @@
 	{% for comment in comments %}
 		<div class="comment">
 			<a href="" class="username">{{ comment.user }}</a>
+			<p class="comment-date">{{ comment.date }}</p>
 			<p>{{ comment.text }}</p>
 		</div>
 
