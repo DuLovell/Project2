@@ -49,7 +49,7 @@
 	{% endif %}
 	{% for comment in comments %}
 		<div class="comment">
-			<a href="{% url 'profile' user %}" class="username">{{ comment.user }}</a>
+			<a href="{% url 'profile' comment.user %}" class="username">{{ comment.user }}</a>
 			<p class="comment-date">{{ comment.date }}</p>
 			<p class="comment-text">{{ comment.text }}</p>
 		</div>
