@@ -1,0 +1,13 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+Profile: {{ profile.username }}
+{% endblock %}
+
+
+{% block body %}
+<h1>{{ profile.username }}</h1>
+<div><p>Last logged in: {{ profile.last_login}}</p></div>
+<div><p>Date joined: {{ profile.date_joined }}</p></div>
+<div><p>Email: {{ profile.email }}</p></div>
+{% endblock %}

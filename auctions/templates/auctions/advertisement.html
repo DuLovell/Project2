@@ -26,7 +26,7 @@
 				<button type="submit">Place bid</button>
 			</form>
 		{% else %}
-			<p>Log in to place a bid</p>
+			<p><span style="font-weight: bold;">Log in</span> to place a bid</p>
 		{% endif %}
 	
 	{% else %}
@@ -45,13 +45,13 @@
 			<button type="submit" >Leave feedback</button>
 		</form>
 	{% else %}
-		<p>Log in to leave feedback</p>
+		<p><span style="font-weight: bold;">Log in</span> to leave feedback</p>
 	{% endif %}
 	{% for comment in comments %}
 		<div class="comment">
-			<a href="" class="username">{{ comment.user }}</a>
+			<a href="{% url 'profile' user %}" class="username">{{ comment.user }}</a>
 			<p class="comment-date">{{ comment.date }}</p>
-			<p>{{ comment.text }}</p>
+			<p class="comment-text">{{ comment.text }}</p>
 		</div>
 
 	{% endfor %}

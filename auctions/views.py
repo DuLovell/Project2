@@ -120,3 +120,9 @@ def advertisement(request, id):
         "comments": comments,
         "id": id
         })
+
+def profile(request, username):
+    user = User.objects.get(username=username)
+    return render(request, "auctions/profile.html", {
+        "profile": user
+        })
