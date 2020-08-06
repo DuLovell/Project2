@@ -1,19 +1,51 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2><br>
+    <h2 style="display: table;">Active Listings</h2>
+    <div>
+    	<form action="" method="get" id="filter">
+    		<select name="category">
+    			<option value="None">None</option>
+    			<option value="Fashion">Fashion</option>
+    			<option value="Toys">Toys</option>
+    			<option value="Electronics">Electronics</option>
+    			<option value="Home">Home</option>
+    			<option value="Appliances">Appliances</option>
+    			<option value="Books">Books</option>
+    		</select>
+    		<button type="submit">Filter</button>
+    	</form>
+    </div><br><br>
 
     {% for advert in advertisements %}
+
     	{% if advert.active %}
-	    	<div class="ad">
-	    		<a href="listings/{{advert.id}}" style="">
+    		{% if category and category != "None" %}
+    			
+    			{% if advert.category == category %}
+			    	<div class="ad">
+			    		<a href="listings/{{advert.id}}" style="">
+			    			<img src={{advert.image}} style="width: 300px; height: 150px; position: absolute; left: 20px; overflow: auto;">
+				    		<h3 class="adv-info">{{ advert.title }}</h3>
+				    		<p class="adv-info" style="font-weight: bold">${{advert.bid.last.amount }}</p>
+				    		<p class="adv-info">{{ advert.description }}</p>
+				    		<p class="created adv-info">{{ advert.created }}</p>
+			    		</a>
+			    	</div>
+			    {% endif %}
+		    
+		    {% else %}
+    			<div class="ad">
+	    			<a href="listings/{{advert.id}}" style="">
 	    			<img src={{advert.image}} style="width: 300px; height: 150px; position: absolute; left: 20px; overflow: auto;">
 		    		<h3 class="adv-info">{{ advert.title }}</h3>
 		    		<p class="adv-info" style="font-weight: bold">${{advert.bid.last.amount }}</p>
 		    		<p class="adv-info">{{ advert.description }}</p>
 		    		<p class="created adv-info">{{ advert.created }}</p>
 	    		</a>
-	    	</div>
+	    		</div>
+	    	{% endif %}
+
 	    {% endif %}
 
     {% endfor %}

@@ -11,6 +11,14 @@ from .models import User, Advert, Bid, Comment
 def index(request):
     advertisements = Advert.objects.all().order_by("-created")
 
+    if request.GET.get("category"):
+        category = request.GET.get("category")
+
+        return render(request, "auctions/index.html", {
+                "advertisements": advertisements,
+                "category": category
+            })
+
     return render(request, "auctions/index.html", {
         "advertisements": advertisements,
         })

@@ -57,3 +57,9 @@ a, a:hover {
 .comment-text {
 	margin-top: -12px;
 }
+
+#filter {
+	position: relative;
+	bottom: 40px;
+	float: right;
+}
