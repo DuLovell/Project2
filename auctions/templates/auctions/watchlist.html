@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+Watchlist
+{% endblock %}
+
+{% block body %}
+	<h1>Watchlist</h1>
+	{% for advert in advertisements %}
+		{% for profile in advert.saved.all %}
+			{% if profile.username == username %}
+				<div class="ad">
+		    		<a href="listings/{{advert.id}}" style="">
+		    			<img src={{advert.image}} style="width: 300px; height: 150px; position: absolute; left: 20px; overflow: auto;">
+			    		<h3 class="adv-info">{{ advert.title }}</h3>
+			    		<p class="adv-info" style="font-weight: bold">${{advert.bid.last.amount }}</p>
+			    		<p class="adv-info">{{ advert.description }}</p>
+			    		<p class="created adv-info">{{ advert.created }}</p>
+		    		</a>
+		    	</div>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+{% endblock %}

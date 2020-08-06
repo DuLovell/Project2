@@ -137,3 +137,13 @@ def profile(request, username):
     return render(request, "auctions/profile.html", {
         "profile": user
         })
+
+@login_required
+def watchlist(request):
+    user = request.user.username
+    ads = Advert.objects.all().order_by("-created")
+
+    return render(request, "auctions/watchlist.html", {
+        "advertisements": ads,
+        "username": user
+        })
