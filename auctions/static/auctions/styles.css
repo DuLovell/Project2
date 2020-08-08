@@ -2,6 +2,13 @@ body {
     padding: 10px;
     font-family: Mulish;
 }
+button:focus {
+	outline: none;
+}
+
+#header {
+	background-color: #e4dbbf;
+}
 
 a, a:hover {
 	text-decoration: none;
@@ -16,8 +23,8 @@ a, a:hover {
 	height: 200px;
 }
 .ad:hover {
-	box-shadow: 1px 1px 3px 2px #ff9b52;
-	border-color: #ff9b52;
+	box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.1);
+	border-color: #c4c4c4;
 }
 
 .created {
@@ -27,19 +34,19 @@ a, a:hover {
 }
 
 .nav-link {
-	color: 	#ff6c00;
 }
 .nav-link:hover {
-	color: #ff6c00;
-	border-bottom: 1px solid #ff6c00;
+	border-bottom: 1px solid #ded3b1;
 }
 
 .username {
 	font-weight: bold;
+	padding: 1px 5px;
 }
 
 .username:hover {
-	color: 	#ff6c00;
+	border: 2px double #d8cba3;
+	border-radius: 2px;
 	/*border-bottom: 1px solid #ff6c00;*/
 }
 .adv-info {
@@ -56,10 +63,76 @@ a, a:hover {
 
 .comment-text {
 	margin-top: -12px;
+	border-radius: 2px;
 }
 
 #filter {
 	position: relative;
 	bottom: 40px;
 	float: right;
+}
+
+button {
+	padding: 1px 5px 1px;
+	border-radius: 2px;
+	border: 1px solid #c4c4c4;
+	font-size: 16px;
+}
+
+button:hover {
+	box-shadow: 1px 1px 3px 2px rgba(0,0,0,0.1);
+}
+
+.adv-img {
+	margin: 15px 0px 15px;
+}
+
+#bid-input {
+	border: 1px solid #c4c4c4;
+	border-radius: 2px;
+	padding: 1px 5px;
+	width: 100px;
+	margin-top: 35px;
+}
+
+#bid-input:focus, input:focus {
+	outline: none;
+
+}
+
+#adv-description {
+	margin: 15px 0px 20px;
+	display: table;
+}
+
+#adv-price {
+	margin-bottom: 12px;
+}
+
+#adv-details {
+	margin-top: 25px;
+	margin-bottom: 20px;
+}
+
+#adv-feedback {
+	position: relative;
+	bottom: 8px;
+}
+#adv-comment:focus, textarea:focus {
+	outline: none;
+	min-height: 30px;
+}
+
+.create-input {
+	margin: 10px 0px 10px;
+}
+
+#create-button {
+	position: relative;
+	top: 10px;
+	left: 125px;
+}
+
+#create-main {
+	
 }

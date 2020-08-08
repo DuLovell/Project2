@@ -137,6 +137,7 @@ def advertisement(request, id):
         "min_bid": highest_bid + 1,
         "username": user,
         "comments": comments,
+        "user_obj": user_obj,
         "id": id
         })
 

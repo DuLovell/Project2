@@ -6,34 +6,45 @@
 
 
 {% block body %}
-		<p style="display: table; float: right;">{{ advert.category }}</p>
 		{% if user.is_authenticated %}
 			<form>
 				<input type="hidden" name="q" value="watchlist">
-				<button type="submit">Watchlist</button>	
+				{% if advert in user_obj.adverts_saved.all %}
+					<button type="submit" class="adv-button" style="border: 3px dashed #d8cba3; border-radius: 2px;">Watchlist</button>	
+				{% else %}
+					<button type="submit" class="adv-button" style="border: 3px solid #d8cba3; border-radius: 2px;">Watchlist</button>	
+				{% endif %}
 			</form>
 		{% endif %}
-		<img src={{advert.image}} alt="pic" style="width: 60%;">
-		<h1> {{ advert.title}} </h1>
-		<div> {{ advert.description }} </div>
+		<img src={{advert.image}} alt="pic" style="width: 35%;" class="adv-img">
+		<h1 class="adv-title"> {{ advert.title}} </h1>
+		<div id="adv-description"> {{ advert.description }} </div>
 	
 	{% if advert.active %}
-		<div style="font-weight: bold; font-size: 22px;"> ${{ advert.bid.last.amount }}</div>
+		<div id="adv-price" style="font-weight: bold; font-size: 22px;"> ${{ advert.bid.last.amount }}</div>
 		{% if user.is_authenticated and advert.bid.first.user == username %}
 			<form action="" method="get">
 				<input type="hidden" name="q" value="close">
-				<button type="submit">Close auction</button></a>
+				<button type="submit" class="adv-button">Close auction</button></a>
 			</form>
 		{% endif %}
 		{% if user.is_authenticated %}
 			<form action="{{advert.id}}" method="post">
 				{% csrf_token %}
-				<input type="number" step="0.01" min={{min_bid}} name="amount" required>
-				<button type="submit">Place bid</button>
+				<input type="number" step="0.01" min={{min_bid}} name="amount" required id="bid-input">
+				<button type="submit" class="adv-button">Place bid</button>
 			</form>
 		{% else %}
 			<p><span style="font-weight: bold;">Log in</span> to place a bid</p>
 		{% endif %}
+		<br>
+		<div id="adv-details">
+			<h4 style="font-weight: bold;">Details</h4>
+			<ul>
+				<li>Listed by: <a href="{% url 'profile' advert.bid.first.user %}" class="username">{{ advert.bid.first.user }}</a></li>
+				<li>Category: {{ advert.category }}</li>
+			</ul>
+		</div>
 	
 	{% else %}
 		{% if advert.bid.last.user == username %}
@@ -47,8 +58,8 @@
 	{% if user.is_authenticated %}
 		<form action={{id}} method="post">
 			{% csrf_token %}
-			<textarea type="text" name="comment"></textarea>
-			<button type="submit" >Leave feedback</button>
+			<textarea type="text" name="comment" id="adv-comment"></textarea>
+			<button type="submit" class="adv-button" id="adv-feedback">Leave feedback</button>
 		</form>
 	{% else %}
 		<p><span style="font-weight: bold;">Log in</span> to leave feedback</p>

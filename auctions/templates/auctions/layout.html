@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish"></li>
     </head>
     <body>
-        <h1>Auctions</h1>
+        <h1 id="header">Auction<span style="background-color: white; border: 2px solid #e4dbbf;">s</span></h1>
         <div>
             {% if user.is_authenticated %}
                 Signed in as <strong>{{ user.username }}</strong>.
@@ -20,9 +20,6 @@
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
-            </li>
-            <li>
-                <a class="nav-link" href="">Categories</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
