@@ -10,6 +10,7 @@ Create New Lot
 <div id="create-main">
 	<form action="create" method="post" style="margin: 20px">
 		{% csrf_token %}
+		<label for="select">Category: </label>
 		<select name="category" id="select">
 			<option value="Fashion">Fashion</option>
 			<option value="Toys">Toys</option>
@@ -18,10 +19,14 @@ Create New Lot
 			<option value="Appliances">Appliances</option>
 			<option value="Books">Books</option>
 		</select><br>
-		<input class="create-input" type="url" name="image" placeholder="Image URL" ><br>
-		<input class="create-input" type="text" name="title" placeholder="Title"><br>
-		<textarea class="create-input" name="description" placeholder="Description"></textarea><br>
-		<input class="create-input" type="number" step="0.01" min=0 name="price" placeholder="Start price"><br>
+		<label for="image-cr">Image: </label>
+		<input class="create-input" id="image-cr" type="url" name="image" placeholder="Image URL" ><br>
+		<label for="title-cr">Title: </label>
+		<input class="create-input" id="title-cr" type="text" name="title" placeholder="Title"><br>
+		<label for="descr-cr" id="descr-label">Description: </label>
+		<textarea class="create-input" id="descr-cr" name="description" placeholder="Description"></textarea><br>
+		<label for="price-cr" >Price: </label>
+		<input class="create-input" id="price-cr" type="number" step="0.01" min=0 name="price" placeholder="Start price"><br>
 		<button id="create-button"type="submit" style="padding: 1px 5px; font-size: 18px;">Submit</button>
 	</form>
 </div>

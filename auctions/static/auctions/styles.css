@@ -125,14 +125,33 @@ button:hover {
 
 .create-input {
 	margin: 10px 0px 10px;
+	position: relative;
 }
 
 #create-button {
 	position: relative;
 	top: 10px;
-	left: 125px;
+	left: 218px;
 }
 
 #create-main {
 	
+}
+
+#image-cr {
+	left: 36px;
+}
+#title-cr {
+	left: 51px;
+}
+#price-cr {
+	left: 48px;
+}
+#select {
+	position: relative;
+	left: 13px;
+}
+#descr-label {
+	position: relative;
+	bottom: 50px;
 }

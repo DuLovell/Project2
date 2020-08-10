@@ -103,7 +103,10 @@ def advertisement(request, id):
     highest_bid = ad.bid.last().amount
     comments = ad.comments.all().order_by("-date")
     
-    user_obj = User.objects.get(username=user)
+    try:
+        user_obj = User.objects.get(username=user)
+    except:
+        user_obj = None
     current_user_saved = ad.saved.filter(username=user)  # QuerySet
 
     if request.GET.get("q") == "watchlist":
